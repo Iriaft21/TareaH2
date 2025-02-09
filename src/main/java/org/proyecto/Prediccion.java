@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Prediccion {
     //atributos de la clase
+    private String id;
     private String lugar;
     private String fecha;
     private List<String> estadoCielo;
@@ -24,6 +25,19 @@ public class Prediccion {
         this.temperaturaMin = temperaturaMin;
         this.precipitacionTotal = precipitacionTotal;
         this.viento = velocidadViento;
+        this.coberturaNubosa = coberturaNubosa;
+        this.humedad = humedad;
+    }
+
+    public Prediccion(String id, String lugar, String fecha, List<String> estadoCielo, double temperaturaMax, double temperaturaMin, double precipitacionTotal, double viento, double coberturaNubosa, double humedad) {
+        this.id = id;
+        this.lugar = lugar;
+        this.fecha = fecha;
+        this.estadoCielo = estadoCielo;
+        this.temperaturaMax = temperaturaMax;
+        this.temperaturaMin = temperaturaMin;
+        this.precipitacionTotal = precipitacionTotal;
+        this.viento = viento;
         this.coberturaNubosa = coberturaNubosa;
         this.humedad = humedad;
     }
@@ -99,6 +113,14 @@ public class Prediccion {
 
     public void setHumedad(double humedad) {
         this.humedad = humedad;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     //metodo toString

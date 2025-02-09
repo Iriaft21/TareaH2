@@ -23,19 +23,21 @@ public class BBDD {
             // Crear la tabla
             try (PreparedStatement crearTabla = conn.prepareStatement(
                     "CREATE TABLE Clima (\n" +
-                            "    lugar VARCHAR(255) NOT NULL,\n" +
-                            "    fecha VARCHAR(255) NOT NULL,\n" +
-                            "    estadoCielo TEXT NOT NULL,\n" +
-                            "    temperaturaMax DECIMAL(5, 2) NOT NULL,\n" +
-                            "    temperaturaMin DECIMAL(5, 2) NOT NULL,\n" +
-                            "    precipitacionTotal DECIMAL(5, 2) NOT NULL,\n" +
-                            "    viento DECIMAL(5, 2) NOT NULL,\n" +
-                            "    coberturaNubosa DECIMAL(5, 2) NOT NULL,\n" +
-                            "    humedad DECIMAL(5, 2) NOT NULL,\n" +
-                            "    PRIMARY KEY (lugar, fecha)\n" +
+                            " id INT AUTO_INCREMENT NOT NULL,\n" +
+                            " lugar VARCHAR(255) NOT NULL,\n" +
+                            " fecha VARCHAR(255) NOT NULL,\n" +
+                            " estadoCielo TEXT NOT NULL,\n" +
+                            " temperaturaMax DECIMAL(5, 2) NOT NULL,\n" +
+                            " temperaturaMin DECIMAL(5, 2) NOT NULL,\n" +
+                            " precipitacionTotal DECIMAL(5, 2) NOT NULL,\n" +
+                            " viento DECIMAL(5, 2) NOT NULL,\n" +
+                            " coberturaNubosa DECIMAL(5, 2) NOT NULL,\n" +
+                            " humedad DECIMAL(5, 2) NOT NULL,\n" +
+                            " PRIMARY KEY (id)\n" +
                             ");")) {
                 crearTabla.execute();
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,10 +45,9 @@ public class BBDD {
 
     public static void insertarDatos(Prediccion prediccion) {
         try(Connection conn = DriverManager.getConnection(url, usuario, password)){
-            //Crear tabla
             try (PreparedStatement insertarDatos = conn.prepareStatement(
                     "INSERT INTO Clima (lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)\n" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);")){
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
                 insertarDatos.setString(1, prediccion.getLugar());
                 insertarDatos.setString(2, prediccion.getFecha());
                 List<String> estadoCieloList = prediccion.getEstadoCielo();
@@ -65,13 +66,13 @@ public class BBDD {
         }
     }
 
-    public static List<Prediccion>  select(){
+    public static List<Prediccion> select() {
         List<Prediccion> prediccions = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(url, usuario, password)){
-            //Crear tabla
-            try (PreparedStatement select = conn.prepareStatement("SELECT * FROM CLIMA")){
+        try(Connection conn = DriverManager.getConnection(url, usuario, password)) {
+            try (PreparedStatement select = conn.prepareStatement("SELECT * FROM Clima")) {
                 ResultSet rs = select.executeQuery();
-                while(rs.next()){
+                while(rs.next()) {
+                    int id = rs.getInt("id");
                     String lugar = rs.getString("lugar");
                     String fecha = rs.getString("fecha");
                     String estadoCielo = rs.getString("estadoCielo");
@@ -82,34 +83,55 @@ public class BBDD {
                     double viento = rs.getDouble("viento");
                     double coberturaNubosa = rs.getDouble("coberturaNubosa");
                     double humedad = rs.getDouble("humedad");
-                    Prediccion prediccion = new Prediccion(lugar, fecha, cielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad );
+
+                    Prediccion prediccion = new Prediccion(String.valueOf(id), lugar, fecha, cielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad);
                     prediccions.add(prediccion);
-                    return prediccions;
                 }
+            }
+            return prediccions;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void modificarDatos(Prediccion prediccion){
+        try (Connection conn = DriverManager.getConnection(url, usuario, password)) {
+            String sql = "UPDATE Clima SET lugar = ?, fecha = ?, estadoCielo = ?, temperaturaMax = ?, temperaturaMin = ?, precipitacionTotal = ?, viento = ?, coberturaNubosa = ?, humedad = ? " +
+                    "WHERE id = ?";
+            try (PreparedStatement actualizarDatos = conn.prepareStatement(sql)) {
+                actualizarDatos.setString(1, prediccion.getLugar());
+                actualizarDatos.setString(2, prediccion.getFecha());
+                List<String> estadoCieloList = prediccion.getEstadoCielo();
+                String estadoCielo = String.join(",", estadoCieloList);
+                actualizarDatos.setString(3, estadoCielo);
+                actualizarDatos.setDouble(4, prediccion.getTemperaturaMax());
+                actualizarDatos.setDouble(5, prediccion.getTemperaturaMin());
+                actualizarDatos.setDouble(6, prediccion.getPrecipitacionTotal());
+                actualizarDatos.setDouble(7, prediccion.getViento());
+                actualizarDatos.setDouble(8, prediccion.getCoberturaNubosa());
+                actualizarDatos.setDouble(9, prediccion.getHumedad());
+                actualizarDatos.setInt(10, Integer.parseInt(prediccion.getId()));
+                actualizarDatos.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
-    public static void modificarDatos(Prediccion prediccion){
+    public static void eliminarPrediccion(int id) {
         try (Connection conn = DriverManager.getConnection(url, usuario, password)) {
-            String sql = "UPDATE Clima SET estadoCielo = ?, temperaturaMax = ?, temperaturaMin = ?, precipitacionTotal = ?, viento = ?, coberturaNubosa = ?, humedad = ? " +
-                    "WHERE lugar = ? AND fecha = ?";
-            try (PreparedStatement actualizarDatos = conn.prepareStatement(sql)) {
-                List<String> estadoCieloList = prediccion.getEstadoCielo();
-                String estadoCielo = String.join(",", estadoCieloList);
-                actualizarDatos.setString(1, estadoCielo);
-                actualizarDatos.setDouble(2, prediccion.getTemperaturaMax());
-                actualizarDatos.setDouble(3, prediccion.getTemperaturaMin());
-                actualizarDatos.setDouble(4, prediccion.getPrecipitacionTotal());
-                actualizarDatos.setDouble(5, prediccion.getViento());
-                actualizarDatos.setDouble(6, prediccion.getCoberturaNubosa());
-                actualizarDatos.setDouble(7, prediccion.getHumedad());
-                actualizarDatos.setString(8, prediccion.getLugar());
-                actualizarDatos.setString(9, prediccion.getFecha());
-                actualizarDatos.executeUpdate();
+            String sql = "DELETE FROM Clima WHERE id = ?";
+            try (PreparedStatement borrarDatos = conn.prepareStatement(sql)) {
+                borrarDatos.setInt(1, id);
+                int filasAfectadas = borrarDatos.executeUpdate();
+
+                // Mensaje de depuración
+                if (filasAfectadas > 0) {
+                    System.out.println("Elemento con id " + id + " eliminado.");
+                } else {
+                    System.out.println("No se encontró el elemento con id " + id + ".");
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
