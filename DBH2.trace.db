@@ -1,0 +1,139 @@
+2025-02-09 17:57:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor Invalido "10" para el parametro "parameterIndex"
+Invalid value "10" for parameter "parameterIndex" [90008-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:590)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:280)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1503)
+	at org.h2.jdbc.JdbcPreparedStatement.setDouble(JdbcPreparedStatement.java:680)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:63)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 17:58:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (id, lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 18:00:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 18:00:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 18:01:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO CLIMA (LUGAR, FECHA, ESTADOCIELO, TEMPERATURAMAX, TEMPERATURAMIN, PRECIPITACIONTOTAL, VIENTO, COBERTURANUBOSA, HUMEDAD)
+VALUES (DEFAULT ?[*], ?, ?, ?, ?, ?, ?;"; se esperaba ",, )"
+Syntax error in SQL statement "INSERT INTO CLIMA (LUGAR, FECHA, ESTADOCIELO, TEMPERATURAMAX, TEMPERATURAMIN, PRECIPITACIONTOTAL, VIENTO, COBERTURANUBOSA, HUMEDAD)
+VALUES (DEFAULT ?[*], ?, ?, ?, ?, ?, ?;"; expected ",, )"; SQL statement:
+INSERT INTO Clima (lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT ?, ?, ?, ?, ?, ?, ?; [42001-200]
+2025-02-09 18:02:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 18:04:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (id, lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
+2025-02-09 18:07:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Clima (id, lugar, fecha, estadoCielo, temperaturaMax, temperaturaMin, precipitacionTotal, viento, coberturaNubosa, humedad)
+VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?); [21002-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.command.dml.Insert.prepare(Insert.java:319)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at org.proyecto.BBDD.insertarDatos(BBDD.java:49)
+	at org.proyecto.Main.generarPredicciones(Main.java:395)
+	at org.proyecto.Main.main(Main.java:56)
