@@ -15,7 +15,7 @@ public class Prediccion {
     private double coberturaNubosa;
     private double humedad;
 
-    //constructor de la clase
+    //constructor de la clase sin id
     public Prediccion(String lugar, String fecha, List<String> estadoCielo, double temperaturaMax, double temperaturaMin, double precipitacionTotal,
                       double velocidadViento, double coberturaNubosa, double humedad) {
         this.lugar = lugar;
@@ -29,6 +29,7 @@ public class Prediccion {
         this.humedad = humedad;
     }
 
+    //Constructor de la clase con id
     public Prediccion(String id, String lugar, String fecha, List<String> estadoCielo, double temperaturaMax, double temperaturaMin, double precipitacionTotal, double viento, double coberturaNubosa, double humedad) {
         this.id = id;
         this.lugar = lugar;
