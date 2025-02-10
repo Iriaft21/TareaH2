@@ -64,12 +64,12 @@ public class Parsear {
                 JSONArray dias = (JSONArray) propiedades.get("days");
 
                 for (Object dayObj : dias) {
-                    JSONObject day = (JSONObject) dayObj;
-                    JSONObject timePeriod = (JSONObject) day.get("timePeriod");
-                    String fechaCompleta = (String) ((JSONObject) timePeriod.get("begin")).get("timeInstant");
-                    String dia = fechaCompleta.split("T")[0];
+                    JSONObject dia = (JSONObject) dayObj;
+                    JSONObject periodoTiempo = (JSONObject) dia.get("timePeriod");
+                    String fechaCompleta = (String) ((JSONObject) periodoTiempo.get("begin")).get("timeInstant");
+                    String fechaDia = fechaCompleta.split("T")[0];
 
-                    Prediccion prediccion = extraerPrediccion(day, lugar, dia);
+                    Prediccion prediccion = extraerPrediccion(dia, lugar, fechaDia);
                     predicciones.add(prediccion);
                     BBDD.insertarDatos(prediccion);
                 }
@@ -79,12 +79,12 @@ public class Parsear {
         }
     }
 
-    private static Prediccion extraerPrediccion(JSONObject day, String lugar, String dia) {
+    private static Prediccion extraerPrediccion(JSONObject dia, String lugar, String fechaDia) {
         double temperaturaMaxima = 0, temperaturaMinima = Double.MAX_VALUE;
         double viento = 0, precipitacion = 0, coberturaNubosa = 0, humedad = 0;
         List<String> cielo = new ArrayList<>();
 
-        JSONArray variables = (JSONArray) day.get("variables");
+        JSONArray variables = (JSONArray) dia.get("variables");
         for (Object variableObj : variables) {
             JSONObject variable = (JSONObject) variableObj;
             String nombreVariable = (String) variable.get("name");
@@ -133,8 +133,7 @@ public class Parsear {
         viento = roundDouble(viento / horas, 2);
         coberturaNubosa = roundDouble(coberturaNubosa / horas, 2);
         humedad = roundDouble(humedad / horas, 2);
-
-        return new Prediccion(lugar, dia, cielo, temperaturaMaxima, temperaturaMinima, precipitacion, viento, coberturaNubosa, humedad);
+        return new Prediccion(lugar, fechaDia, cielo, temperaturaMaxima, temperaturaMinima, precipitacion, viento, coberturaNubosa, humedad);
     }
 
     private static String traducirEstadoCielo(String estado) {
@@ -151,6 +150,14 @@ public class Parsear {
             case "RAIN": return "Lluvia";
             case "SNOW": return "Nieve";
             case "STORMS": return "Tormentas";
+            case "MIST": return "Neblina";
+            case "FOG_BANK": return "Banco de niebla";
+            case "MID_CLOUDS": return "Nubes medias";
+            case "WEAK_RAIN": return "Lluvia débil";
+            case "WEAK_SHOWERS": return "Chubascos débiles";
+            case "STORM_THEN_CLOUDY": return "Tormenta y luego nuboso";
+            case "MELTED_SNOW": return "Nieve derretida";
+            case "RAIN_HayL": return "Granizo";
             default: return estado;
         }
     }

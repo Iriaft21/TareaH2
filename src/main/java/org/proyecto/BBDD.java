@@ -126,7 +126,6 @@ public class BBDD {
                 borrarDatos.setInt(1, id);
                 int filasAfectadas = borrarDatos.executeUpdate();
 
-                // Mensaje de depuración
                 if (filasAfectadas > 0) {
                     System.out.println("Elemento con id " + id + " eliminado.");
                 } else {
