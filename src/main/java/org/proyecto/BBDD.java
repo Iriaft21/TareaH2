@@ -147,7 +147,7 @@ public class BBDD {
                 if (filasAfectadas > 0) {
                     System.out.println("Elemento con id " + id + " eliminado.");
                 } else {
-                    //Avisamos si no se encontro el elemento a eliminar
+                    //Tambien mostramos otro aviso en caso de no encontrar el elemento
                     System.out.println("No se encontró el elemento con id " + id + ".");
                 }
             }
